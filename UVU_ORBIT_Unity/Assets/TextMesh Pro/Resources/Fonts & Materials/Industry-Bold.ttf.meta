@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 8353844b12e93954d9200c1ee553847a
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Industry-Bold
+  fontNames:
+  - Industry-Bold
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 3385ee91aabe4ae4795db7430d569b54, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,195 @@
+fileFormatVersion: 2
+guid: ca605192cce98489481ddac227fe78aa
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Mars_One1
+    100002: Mars_One4
+    100004: Mars_One5
+    100006: Mars_One6
+    100008: Mars_One___antenna
+    100010: Mars_One___flag
+    100012: Mars_One___ground
+    100014: Mars_One___m6
+    100016: Mars_One___module01
+    100018: Mars_One___module02
+    100020: Mars_One___module03
+    100022: Mars_One___module04
+    100024: Mars_One___module05
+    100026: Mars_One___sky
+    100028: //RootNode
+    100030: mars_one_base_root
+    400000: Mars_One1
+    400002: Mars_One4
+    400004: Mars_One5
+    400006: Mars_One6
+    400008: Mars_One___antenna
+    400010: Mars_One___flag
+    400012: Mars_One___ground
+    400014: Mars_One___m6
+    400016: Mars_One___module01
+    400018: Mars_One___module02
+    400020: Mars_One___module03
+    400022: Mars_One___module04
+    400024: Mars_One___module05
+    400026: Mars_One___sky
+    400028: //RootNode
+    400030: mars_one_base_root
+    2100000: 06
+    2100002: 07
+    2100004: 08
+    2100006: 09
+    2100008: 10
+    2100010: 11
+    2100012: 12
+    2100014: 13
+    2100016: 15
+    2100018: 14
+    2100020: 30
+    2100022: 31
+    2100024: 28
+    2100026: 01
+    2100028: 02
+    2100030: 03
+    2100032: 04
+    2100034: 26
+    2100036: 27
+    2100038: 16
+    2100040: 17
+    2100042: 18
+    2100044: 19
+    2100046: 20
+    2100048: 21
+    2100050: 22
+    2100052: 23
+    2100054: 24
+    2100056: 25
+    2100058: 05
+    2300000: Mars_One1
+    2300002: Mars_One4
+    2300004: Mars_One5
+    2300006: Mars_One6
+    2300008: Mars_One___antenna
+    2300010: Mars_One___flag
+    2300012: Mars_One___ground
+    2300014: Mars_One___m6
+    2300016: Mars_One___module01
+    2300018: Mars_One___module02
+    2300020: Mars_One___module03
+    2300022: Mars_One___module04
+    2300024: Mars_One___module05
+    2300026: Mars_One___sky
+    3300000: Mars_One1
+    3300002: Mars_One4
+    3300004: Mars_One5
+    3300006: Mars_One6
+    3300008: Mars_One___antenna
+    3300010: Mars_One___flag
+    3300012: Mars_One___ground
+    3300014: Mars_One___m6
+    3300016: Mars_One___module01
+    3300018: Mars_One___module02
+    3300020: Mars_One___module03
+    3300022: Mars_One___module04
+    3300024: Mars_One___module05
+    3300026: Mars_One___sky
+    4300000: Mars_One1
+    4300002: Mars_One4
+    4300004: Mars_One5
+    4300006: Mars_One6
+    4300008: Mars_One___antenna
+    4300010: Mars_One___flag
+    4300012: Mars_One___ground
+    4300014: Mars_One___m6
+    4300016: Mars_One___module01
+    4300018: Mars_One___module02
+    4300020: Mars_One___module03
+    4300022: Mars_One___module04
+    4300024: Mars_One___module05
+    4300026: Mars_One___sky
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

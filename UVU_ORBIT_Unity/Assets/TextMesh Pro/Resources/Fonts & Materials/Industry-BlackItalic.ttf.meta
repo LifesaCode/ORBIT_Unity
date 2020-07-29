@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 33921605a63394240b69f13a966862bf
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -1
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Industry-BlackItalic
+  fontNames:
+  - Industry-BlackItalic
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: e262b9e5654bd484abfd115913aef39c, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

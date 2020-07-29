@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 734cd9d2ffc86e34ca0a3a67680decb7
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: 0
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Industry-Medium
+  fontNames:
+  - Industry-Medium
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: b8400bc8aba6b5a48b189a1d96e22ec8, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
