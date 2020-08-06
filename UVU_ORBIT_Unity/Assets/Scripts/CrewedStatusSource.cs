@@ -18,20 +18,13 @@ public class CrewedStatusSource : MonoBehaviour
 	public delegate void ChangeCrewed();
 	public static event ChangeCrewed ChangeCrewedStatus;
 
-	public void ClickCheck()
-	{
-		Debug.Log("Button Clicked");
-	}
-
 public void OnCrewedChange()
 	{
-		Debug.Log("OnCrewedChange Triggered");
 		if(ChangeCrewedStatus != null)
 		{
 			ChangeCrewedStatus();
 		}
 
-		Color c;
 		if(crewed){
 			crewed = false;
 

@@ -25,19 +25,18 @@ public class C_OxygenGauges : MonoBehaviour
 
     public GameObject OxygenCells;
     public TextMeshProUGUI NumCellsLabel;
-    Image[] childCells;
+    Image[] oxygenCells;
 
     public Image WaterStorage;
     public TextMeshProUGUI waterStorageLabel;
     public Image h2Storage;
     public TextMeshProUGUI h2StorageLabel;
 
-    // get water tank data from WaterManagement
-    public Image FreshTankLevel;
-    public TextMeshProUGUI FreshTankValue;
-    // get h2 tank data from SabatierManagement
-    public Image SabatierH2Tank;
-    public TextMeshProUGUI SabatierH2TankValue;
+    public GameObject StandbyButton;
+    public GameObject GrayOutStandby;
+
+    double freshLevel;
+    double h2Level;
 
     OxygenGenerator o2generator = new OxygenGenerator();
 
@@ -46,10 +45,12 @@ public class C_OxygenGauges : MonoBehaviour
     {
         CrewedStatusSource.ChangeCrewedStatus += ChangeCrewedStatus;
         o2generator.SeedData();
+        C_WaterGauges.OnFreshWaterUpdate += GetFreshLevel;
+        C_SabatierGauges.OnH2Update += GetH2Level;
 
         levelLabels = O2LevelGauge.GetComponentsInChildren<TextMeshProUGUI>();
         outputLabels = O2OutputGauge.GetComponentsInChildren<TextMeshProUGUI>();
-        childCells = OxygenCells.GetComponentsInChildren<Image>();
+        oxygenCells = OxygenCells.GetComponentsInChildren<Image>();
 
         PropertyInfo propInfo = typeof(OxygenGenerator).GetProperty("OxygenLevel");
         IdealRangeAttribute idRangeAtt = (IdealRangeAttribute)Attribute.GetCustomAttribute(propInfo, typeof(IdealRangeAttribute));
@@ -86,10 +87,10 @@ public class C_OxygenGauges : MonoBehaviour
             O2LevelDial.fillAmount = UpdateOxygenLevel();
             O2OutputDial.fillAmount = UpdateOxygenOutput();
 
-            WaterStorage.fillAmount = FreshTankLevel.fillAmount;
-            waterStorageLabel.text = FreshTankValue.text;
-            h2Storage.fillAmount = SabatierH2Tank.fillAmount;
-            h2StorageLabel.text = SabatierH2TankValue.text;
+            WaterStorage.fillAmount = (float)freshLevel / 100;
+            waterStorageLabel.text = freshLevel.ToString();
+            h2Storage.fillAmount = (float)h2Level / 100;
+            h2StorageLabel.text = h2Level.ToString();
             NumCellsLabel.text = o2generator.NumActiveCells.ToString();
 
             UpdateCells();
@@ -109,31 +110,43 @@ public class C_OxygenGauges : MonoBehaviour
         return (float)(o2generator.SystemOutput / 2700) * .75f;
     }
 
+    public void GetFreshLevel(double level)
+    {
+        freshLevel = level;
+    }
+
+    public void GetH2Level(double level)
+    {
+        h2Level = level;
+    }
+
+
     void UpdateCells()
     {
         Color c;
-        if (childCells.Length > 0)
+        int cellson = o2generator.NumActiveCells;
+        if (cellson > 0)
         {
-            for (int i = 1; i < o2generator.NumActiveCells; i++)
+            for (int i = 0; i < cellson; i++)
             {
-                c = childCells[i].color;
+                c = oxygenCells[i].color;
                 c.a = 1;
-                childCells[i].color = c;
+                oxygenCells[i].color = c;
             }
-            for (int i = (o2generator.NumActiveCells); i < 11; i++)
+            for (int i = (cellson); i < 10; i++)
             {
-                c = childCells[i].color;
+                c = oxygenCells[i].color;
                 c.a = 0;
-                childCells[i].color = c;
+                oxygenCells[i].color = c;
             }
         }
         else
         {
-            for (int i = 1; i < 11; i++)
+            for (int i = 0; i < 10; i++)
             {
-                c = childCells[i].color;
+                c = oxygenCells[i].color;
                 c.a = 0;
-                childCells[i].color = c;
+                oxygenCells[i].color = c;
             }
         }
     }
@@ -145,7 +158,18 @@ public class C_OxygenGauges : MonoBehaviour
 
     public void ToggleManualMode()
     {
-        o2generator.IsManualMode = !o2generator.IsManualMode;
+        if (o2generator.IsManualMode)
+        {
+            o2generator.IsManualMode = false;
+            StandbyButton.SetActive(false);
+            GrayOutStandby.SetActive(true);
+        }
+        else
+        {
+            o2generator.IsManualMode = true;
+            StandbyButton.SetActive(true);
+            GrayOutStandby.SetActive(false);
+        }
     }
 
     public void ToggleSystemState()
@@ -163,17 +187,13 @@ public class C_OxygenGauges : MonoBehaviour
 
     public void IncreaseCells()
     {
-        if (o2generator.NumActiveCells < 10)
-        {
-            o2generator.NumActiveCells += 1;
-        }
+        o2generator.IncreaseActiveCells();
+        UpdateCells();
     }
 
     public void DecreaseCells()
     {
-        if (o2generator.NumActiveCells > 1)
-        {
-            o2generator.NumActiveCells -= 1;
-        }
+        o2generator.DecreaseActiveCells();
+        UpdateCells();
     }
 }

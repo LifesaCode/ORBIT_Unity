@@ -67,9 +67,6 @@ public class C_CabinGauges : MonoBehaviour
 		o2Labels[3].text = o2SourceLabels[3].text;
 		OxygenDial.fillAmount = OxygenSourceDial.fillAmount;
 
-		//co2labels[1].text = co2SourceLabels[1].text;
-		//co2labels[2].text = co2SourceLabels[2].text;
-		//co2labels[3].text = co2SourceLabels[3].text;
 		Co2Dial.fillAmount = Co2SourceDial.fillAmount;
 
 		StartCoroutine(UpdateCabin());
@@ -83,6 +80,7 @@ public class C_CabinGauges : MonoBehaviour
 			cabin.ProcessData();
 
 			UpdateDecibels();
+
 			UpdateGauge(TempDial, tempLabels, (float)cabin.Temperature, maxTemp);
 			UpdateGauge(HumidityDial, humidityLabels, (float)cabin.HumidityLevel, maxHumidity);
 

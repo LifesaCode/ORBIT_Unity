@@ -22,17 +22,22 @@ public class C_CO2Gauges : MonoBehaviour
     public Image CO2TankSource;
     public TextMeshProUGUI ActiveBedLabel;
     public GameObject BedToggle;
+	public GameObject StandbyToggle;
+    public GameObject StandbyButton;
+    public GameObject GrayOutStandby;
     public GameObject Diagram;
 
     Image[] diagramImages;
     Image[] toggleImages;
+	Image[] standbyImages;
+	TextMeshProUGUI[] standbyTexts;
     TextMeshProUGUI[] bed1GaugeLabels;
     TextMeshProUGUI[] bed2GaugeLabels;
     TextMeshProUGUI[] co2LevelLabels;
     TextMeshProUGUI[] toggleText;
     float highTemp = 232;
     float maxCO2 = 8;
-
+	SystemStatus currentStatus;
     int fanCounter = 0;
 
     Color opaqueRed = new Color(
@@ -57,15 +62,17 @@ public class C_CO2Gauges : MonoBehaviour
     {
         CrewedStatusSource.ChangeCrewedStatus += ChangeCrewedStatus;
         co2System.SeedData();
+		currentStatus = co2System.Status;
 
         // get gauge label components
         diagramImages = Diagram.GetComponentsInChildren<Image>();
         toggleImages = BedToggle.GetComponentsInChildren<Image>();
-
+        standbyImages = StandbyToggle.GetComponentsInChildren<Image>();
         bed1GaugeLabels = Bed1TempGauge.GetComponentsInChildren<TextMeshProUGUI>();
         bed2GaugeLabels = Bed2TempGauge.GetComponentsInChildren<TextMeshProUGUI>();
         co2LevelLabels = CO2LevelGauge.GetComponentsInChildren<TextMeshProUGUI>();
         toggleText = BedToggle.GetComponentsInChildren<TextMeshProUGUI>();
+        standbyTexts = StandbyToggle.GetComponentsInChildren<TextMeshProUGUI>();
 
         // get min/max values
         PropertyInfo propInfo = typeof(CarbonDioxideRemediation).GetProperty("Bed1Temperature");
@@ -101,10 +108,16 @@ public class C_CO2Gauges : MonoBehaviour
         while (true)
         {
             co2System.ProcessData();
+
             UpdateGauge(Bed1TempDial, bed1GaugeLabels, (float)co2System.Bed1Temperature, highTemp);
             UpdateGauge(Bed2TempDial, bed2GaugeLabels, (float)co2System.Bed2Temperature, highTemp);
             UpdateGauge(CO2LevelDial, co2LevelLabels, (float)co2System.Co2Level, maxCO2);
             CO2Tank.fillAmount = CO2TankSource.fillAmount;
+			
+			if(co2System.Status != currentStatus){
+				UpdateStateToggle();
+				currentStatus = co2System.Status;
+			}
 			
             if(co2System.Status == SystemStatus.Processing)
             {
@@ -193,7 +206,16 @@ public class C_CO2Gauges : MonoBehaviour
 
     public void ToggleManualMode()
     {
-        co2System.IsManualMode = !co2System.IsManualMode;
+		if(co2System.IsManualMode){
+            co2System.IsManualMode = false;
+            StandbyButton.SetActive(false);
+            GrayOutStandby.SetActive(true);
+		}
+		else{
+            co2System.IsManualMode = true;
+            StandbyButton.SetActive(true);
+			GrayOutStandby.SetActive(false);
+		}
     }
 
     public void ToggleSystemState()
@@ -201,10 +223,14 @@ public class C_CO2Gauges : MonoBehaviour
         if(co2System.Status == SystemStatus.Standby)
         {
             co2System.Status = SystemStatus.Processing;
+            currentStatus = SystemStatus.Processing;
+            UpdateStateToggle();
         }
         else
         {
             co2System.Status = SystemStatus.Standby;
+            currentStatus = SystemStatus.Standby;
+            UpdateStateToggle();
         }
     }
 
@@ -219,5 +245,24 @@ public class C_CO2Gauges : MonoBehaviour
             co2System.AbsorbingBed = BedOptions.Bed1;
         }
         ChangeActiveBed();
+    }
+	
+	void UpdateStateToggle()
+    {
+        if(co2System.Status == SystemStatus.Standby)
+        {
+            standbyImages[0].enabled = false;
+            standbyImages[1].enabled = true;
+            standbyTexts[0].color = new Color(255, 255, 255, 1);
+            standbyTexts[1].color = new Color(0, 0, 0, 1);
+        }
+        else
+        {
+            standbyImages[0].enabled = true;
+            standbyImages[1].enabled = false;
+            standbyTexts[0].color = new Color(0, 0, 0, 1);
+            standbyTexts[1].color = new Color(255, 255, 255, 1);
+
+        }
     }
 }

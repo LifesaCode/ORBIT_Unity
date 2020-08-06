@@ -19,6 +19,15 @@ public class C_SystemNavigation : MonoBehaviour
     Image[] buttons;
     bool systemsOn = true;
 
+    public Canvas CabinDynamicElements;
+    public Canvas PowerDynamicElements;
+    public Canvas OxygenDynamicElements;
+    public Canvas Co2DynamicElements;
+    public Canvas WaterDynamicElements;
+    public Canvas SabatierDynamicElements;
+    public Canvas ThermalDynamicElements;
+
+
     private void Start()
     {
         buttons = ButtonPanel.GetComponentsInChildren<Image>();
@@ -28,15 +37,14 @@ public class C_SystemNavigation : MonoBehaviour
 
     private void OnEnable()
     {
-        //ResetButtons();
-        Cabin.SetActive(true);
-        //downstates[0].enabled = true;
+       // Cabin.SetActive(true);
     }
 
     public void GetCabin()
     {
         DisableAllSystems();
         ResetButtons();
+        CabinDynamicElements.enabled = true;
         Cabin.SetActive(true);
         downstates[0].enabled = true;
     }
@@ -45,6 +53,7 @@ public class C_SystemNavigation : MonoBehaviour
     {
         DisableAllSystems();
         ResetButtons();
+        PowerDynamicElements.enabled = true;
         Power.SetActive(true);
         downstates[1].enabled = true;
     }
@@ -53,6 +62,7 @@ public class C_SystemNavigation : MonoBehaviour
     {
         DisableAllSystems();
         ResetButtons();
+        OxygenDynamicElements.enabled = true;
         Oxygen.SetActive(true);
         downstates[2].enabled = true;
     }
@@ -60,6 +70,7 @@ public class C_SystemNavigation : MonoBehaviour
     {
         DisableAllSystems();
         ResetButtons();
+        Co2DynamicElements.enabled = true;
         CarbonDioxide.SetActive(true);
         downstates[3].enabled = true;
     }
@@ -68,6 +79,7 @@ public class C_SystemNavigation : MonoBehaviour
     {
         DisableAllSystems();
         ResetButtons();
+        WaterDynamicElements.enabled = true;
         Water.SetActive(true);
         downstates[4].enabled = true;
     }
@@ -75,6 +87,7 @@ public class C_SystemNavigation : MonoBehaviour
     {
         DisableAllSystems();
         ResetButtons();
+        SabatierDynamicElements.enabled = true;
         Sabatier.SetActive(true);
         downstates[5].enabled = true;
     }
@@ -83,12 +96,21 @@ public class C_SystemNavigation : MonoBehaviour
     {
         DisableAllSystems();
         ResetButtons();
+        ThermalDynamicElements.enabled = true;
         Thermal.SetActive(true);
         downstates[6].enabled = true;
     }
 
     public void DisableAllSystems()
     {
+        CabinDynamicElements.enabled = false;
+        PowerDynamicElements.enabled = false;
+        OxygenDynamicElements.enabled = false;
+        Co2DynamicElements.enabled = false;
+        WaterDynamicElements.enabled = false;
+        SabatierDynamicElements.enabled = false;
+        ThermalDynamicElements.enabled = false;
+
         Cabin.SetActive(false);
         Oxygen.SetActive(false);
         CarbonDioxide.SetActive(false);

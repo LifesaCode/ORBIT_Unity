@@ -27,6 +27,7 @@ public class C_SabatierGauges : MonoBehaviour
     float sIdealMinSpeed;
 
     public GameObject StandbyToggle;
+    public GameObject StandbyButton;
     Image[] standbyImages;
     TextMeshProUGUI[] standbyTexts;
 
@@ -38,6 +39,17 @@ public class C_SabatierGauges : MonoBehaviour
     public TextMeshProUGUI H2TankLabel;
 
     SystemStatus currentStatus;
+
+    public delegate void H2Update(double level);
+    public static event H2Update OnH2Update;
+
+    public void H2Updated()
+    {
+        if(OnH2Update != null)
+        {
+            OnH2Update(sabatier.H2StoreLevel);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -87,6 +99,7 @@ public class C_SabatierGauges : MonoBehaviour
         while (true)
         {
             sabatier.ProcessData();
+            H2Updated();
 
             reactorTempLabels[1].text = sabatier.ReactorTemp.ToString();
             seperatorSpeedLabels[1].text = sabatier.SeperatorMotorSpeed.ToString();
@@ -123,7 +136,18 @@ public class C_SabatierGauges : MonoBehaviour
 
     public void ToggleManualMode()
     {
-        sabatier.IsManualMode = !sabatier.IsManualMode;
+        if (sabatier.IsManualMode)
+        {
+            sabatier.IsManualMode = false;
+            StandbyButton.SetActive(false);
+            standbyImages[4].gameObject.SetActive(true);
+        }
+        else
+        {
+            sabatier.IsManualMode = true;
+            StandbyButton.SetActive(true);
+            standbyImages[4].gameObject.SetActive(false);
+        }
     }
 
     public void ToggleSystemState()

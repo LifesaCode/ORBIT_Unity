@@ -34,9 +34,11 @@ public class C_WaterGauges : MonoBehaviour
     float cIdealTempMin;
 
     public GameObject ProcessorStandbyToggle;
+    public GameObject ProcessorStandbyButton;
     Image[] processorStandbyImages;
     TextMeshProUGUI[] processorStandbyTexts;
     public GameObject DistillerStandbyToggle;
+    public GameObject DistillerStandbyButton;
     Image[] distillerStandbyImages;
     TextMeshProUGUI[] distillerStandbyTexts;
 
@@ -51,6 +53,18 @@ public class C_WaterGauges : MonoBehaviour
 
     SystemStatus currentProcessorStatus;
     SystemStatus currentDistillerStatus;
+
+    public delegate void UpdateFreshWater(double level);
+    public static event UpdateFreshWater OnFreshWaterUpdate;
+
+    public void FreshWaterUpdated()
+    {
+        if(OnFreshWaterUpdate != null)
+        {
+            OnFreshWaterUpdate(water.ProductTankLevel);
+        }
+
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -123,6 +137,8 @@ public class C_WaterGauges : MonoBehaviour
             weewee.ProcessData(dirtyTank.Level);
             dirtyTank.ProcessData(weewee.Status, water.SystemStatus);
             water.ProcessData(dirtyTank.Level);
+
+            FreshWaterUpdated();
 
             distillerTempLabels[1].text = weewee.DistillerTemp.ToString();
             distillerSpeedLabels[1].text = weewee.DistillerSpeed.ToString();
@@ -208,12 +224,34 @@ public class C_WaterGauges : MonoBehaviour
 
     public void ToggleUrineManualMode()
     {
-        weewee.IsManualMode = !weewee.IsManualMode;
+        if (weewee.IsManualMode)
+        {
+            weewee.IsManualMode = false;
+            DistillerStandbyButton.SetActive(false);
+            distillerStandbyImages[4].gameObject.SetActive(true);
+        }
+        else
+        {
+            weewee.IsManualMode = true;
+            DistillerStandbyButton.SetActive(true);
+            distillerStandbyImages[4].gameObject.SetActive(false);
+        }
     }
 
     public void ToggleWaterManualMode()
     {
-        water.IsManualMode = !water.IsManualMode;
+        if (water.IsManualMode)
+        {
+            water.IsManualMode = false;
+            ProcessorStandbyButton.SetActive(false);
+            processorStandbyImages[4].gameObject.SetActive(true);
+        }
+        else
+        {
+            water.IsManualMode = true;
+            ProcessorStandbyButton.SetActive(true);
+            processorStandbyImages[4].gameObject.SetActive(false);
+        }
     }
 
     void UpdateDistillerToggles()

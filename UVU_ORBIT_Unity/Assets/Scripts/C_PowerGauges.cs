@@ -110,7 +110,7 @@ public class C_PowerGauges : MonoBehaviour
 
     void BatteryLevelAnimate(float level, bool inEclipse)
     {
-        if (inEclipse)
+        if (inEclipse || power.IsManualMode)
         {
             ShowDischarging();
         }
@@ -122,7 +122,7 @@ public class C_PowerGauges : MonoBehaviour
 
     void SolarActiveAnimate(bool inEclipse)
     {
-        if (inEclipse)
+        if (inEclipse || power.IsManualMode)
         {
             if (fillCount < 5)
             {

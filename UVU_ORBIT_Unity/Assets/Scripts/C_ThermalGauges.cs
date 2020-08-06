@@ -31,7 +31,9 @@ public class C_ThermalGauges : MonoBehaviour
     public TextMeshProUGUI ExternalMixValue;
     public Image ExternalMixValve;
     public GameObject InternalStandbyToggle;
+    public GameObject InternalStandbyButton;
     public GameObject ExternalStandbyToggle;
+    public GameObject ExternalStandbyButton;
 
     float maxLowTemp;
     float maxMedTemp;
@@ -139,14 +141,16 @@ public class C_ThermalGauges : MonoBehaviour
             externalCoolant.ProcessData();
             internalCoolant.ProcessData();
 
-            if(externalState != externalCoolant.Status)
+            if (externalState != externalCoolant.Status)
             {
                 UpdateExternalToggle();
+                externalState = externalCoolant.Status;
             }
 
             if(internalState != internalCoolant.Status)
             {
                 UpdateInternalToggle();
+                internalState = internalCoolant.Status;
             }
 
             // update gauge values and dials
@@ -184,12 +188,12 @@ public class C_ThermalGauges : MonoBehaviour
         if (externalCoolant.RadiatorDeployed)
         {
 
-            diagramSprites[7].color = Color.white;
+            diagramSprites[6].color = Color.white;
         }
         else
         {
             redColor.a = 1;
-            diagramSprites[7].color = redColor;
+            diagramSprites[6].color = redColor;
         }
     }
 
@@ -206,8 +210,8 @@ public class C_ThermalGauges : MonoBehaviour
             redColor.a = 1;
             greenColor.a = 0;
         }
-        diagramSprites[1].color = greenColor;
-        diagramSprites[2].color = redColor;
+        diagramSprites[0].color = greenColor;
+        diagramSprites[1].color = redColor;
 
         // pump B
         if (externalCoolant.PumpBOn)
@@ -220,8 +224,8 @@ public class C_ThermalGauges : MonoBehaviour
             redColor.a = 1;
             greenColor.a = 0;
         }
-        diagramSprites[3].color = greenColor;
-        diagramSprites[4].color = redColor;
+        diagramSprites[2].color = greenColor;
+        diagramSprites[3].color = redColor;
     }
 
     void ChangeCrewedStatus()
@@ -238,12 +242,34 @@ public class C_ThermalGauges : MonoBehaviour
 
     public void ToggleExternalManualMode()
     {
-        externalCoolant.IsManualMode = !externalCoolant.IsManualMode;
+        if (externalCoolant.IsManualMode)
+        {
+            externalCoolant.IsManualMode = false;
+            ExternalStandbyButton.SetActive(false);
+            externalStandbyImages[4].gameObject.SetActive(true);
+        }
+        else
+        {
+            externalCoolant.IsManualMode = true;
+            ExternalStandbyButton.SetActive(true);
+            externalStandbyImages[4].gameObject.SetActive(false);
+        }
     }
 
     public void ToggleInternalManualMode()
     {
-        internalCoolant.IsManualMode = !internalCoolant.IsManualMode;
+        if (internalCoolant.IsManualMode)
+        {
+            internalCoolant.IsManualMode = false;
+            InternalStandbyButton.SetActive(false);
+            internalStandbyImages[4].gameObject.SetActive(true);
+        }
+        else
+        {
+            internalCoolant.IsManualMode = true;
+            InternalStandbyButton.SetActive(true);
+            internalStandbyImages[4].gameObject.SetActive(false);
+        }
     }
 
     public void ToggleInternalStandby()
