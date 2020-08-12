@@ -46,7 +46,7 @@ Manual mode is selected, un-graying the allowing interaction with the ‘Process
 Cabin represents the current conditions within the station. Temperature, humidity, carbon dioxide, oxygen are monitored here. Each cabin module can be accessed by clicking on its name. Light levels can be changed in each module. Each module except Habitation and Multipurpose has a pod in the scene whose window will change color and intensity when the light level selection is changed. Blue buttons represent daytime color temperature while the orange buttons represent evening or nighttime color temperatures. This helps to regulate day/night cycles for the crew while inhabiting the station. Noise levels are also monitored to ensure the large amount of equipment and fan noise does not cause harm to the crew. 
 
   
-<img src="UVU_ORBIT_Unity/images/cabin1.png" width=50% height=50% alt="Screenshot of Cabin system">
+<img src="UVU_ORBIT_Unity/images/cabin1.png" width=75% height=75% alt="Screenshot of Cabin system">
 
 - #### Power
 
